@@ -1,0 +1,19 @@
+# Set up the user name
+export PS1="%1~$ "
+export PATH=/opt/homebrew/bin:$PATH
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+alias docker="/Applications/Docker.app/Contents/Resources/bin/docker"
+# Vim key binding
+bindkey -v
+bindkey "^H" backward-delete-char
+bindkey "^?" backward-delete-char
+# Color for vim
+source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+# Source customized function
+source ~/.zsh_custom_commands.sh
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+# In .zshrc
+source "$HOME/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
