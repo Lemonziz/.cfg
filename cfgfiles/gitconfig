@@ -6,3 +6,7 @@
 [user]
 	name = Lemonziz
 	email = 167009272+Lemonziz@users.noreply.github.com
+[core]
+	editor = vim
+[pull]
+	rebase = false
