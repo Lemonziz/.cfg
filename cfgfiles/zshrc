@@ -19,7 +19,7 @@ bindkey -v
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 # Color for vim
-source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 # Source customized function
 source ~/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
