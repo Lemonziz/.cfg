@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin zsh
 
 BASEDIR = $(dirname $0)
 cd $BASEDIR
