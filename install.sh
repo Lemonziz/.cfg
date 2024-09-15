@@ -1,4 +1,4 @@
-#;w!/bin/zsh
+#!/bin/zsh
 
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
@@ -23,7 +23,7 @@ symlink() {
 
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
-for name in vimrc gitconfig tmux.conf zshrc; do
+for name in vim vimrc gitconfig tmux.conf zshrc; do
   if [ ! -d "$name" ]; then
     target="$HOME/.$name"
     backup $target

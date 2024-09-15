@@ -14,17 +14,22 @@ if (empty($TMUX) && getenv('TERM_PROGRAM') != 'Apple_Terminal')
   endif
 endif
 
+" Pluggins
 call plug#begin()
 
 " List your plugins here
 Plug 'tpope/vim-sensible'
 Plug 'morhetz/gruvbox'
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 " filetype indent off   " Disable file-type-specific indentation
 " syntax off            " Disable syntax highlighting
+
+" scheme color
 colorscheme gruvbox
 set background=dark
 
+" tabszie
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
@@ -35,8 +40,8 @@ set autoindent
 set clipboard^=unnamed,unnamedplus
 
 " set the cursor for different mode
-let &t_SI = "\e[5 q"
-let &t_EI = "\e[2 q"
+let &t_SI.="\e[5 q" "INSERT mode
+let &t_EI.="\e[2 q" "NORMLA mode
 
 " Comments in Vimscript start with a `"`.
 
