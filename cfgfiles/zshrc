@@ -16,4 +16,4 @@ source ~/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 # In .zshrc
-source "$HOME/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
+source "$HOME/.cfg/zsh_plugins/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
