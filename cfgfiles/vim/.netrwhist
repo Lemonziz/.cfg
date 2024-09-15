@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/ziqi'
 let g:netrw_dirhist_5='/Users/ziqi/.cfg/.git'
 let g:netrw_dirhist_4='/Users/ziqi'
 let g:netrw_dirhist_3='/Users/ziqi/.cfg/.git'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_0='/Users/ziqi/code/EECS/.vscode'
 let g:netrw_dirhist_9='/Users/ziqi/code/EECS'
 let g:netrw_dirhist_8='/Users/ziqi/code'
 let g:netrw_dirhist_7='/Users/ziqi'
-let g:netrw_dirhist_6='/Volumes/code/NUS_CS/CP5105_code/few_body_code'
