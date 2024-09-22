@@ -10,6 +10,10 @@ source "$HOME/.cfg/zsh_plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 source "$HOME/.cfg/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOME/.cfg/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# Disable Highlight with underline
+(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]=none
+ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # Accept Widgets for ZSH Autosuggestion Using Vim word foward key
 ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
 # Partial Accept Widgets for ZSH Autosuggestion Using Vim word foward key
