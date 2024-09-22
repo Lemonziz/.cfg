@@ -1,3 +1,5 @@
+# import brew environment
+export PATH=/opt/homebrew/bin:$PATH
 # Set up the user name
 export PS1="%1~$ "
 export PATH=/opt/homebrew/bin:$PATH
@@ -28,5 +30,3 @@ source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 source ~/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
