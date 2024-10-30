@@ -1,7 +1,13 @@
 # import brew environment
 export PATH=/opt/homebrew/bin:$PATH
+if [[ -d "/Applications/MATLAB_R2024b.app/bin" ]]; then
+    export PATH=/Applications/MATLAB_R2024b.app/bin:$PATH
+fi
+if [[ -d "/Users/ziqi/Applications/samiam" ]]; then
+    export PATH=/Users/ziqi/Applications/samiam:$PATH
+
+fi
 # Set up the user name
-export PS1="%1~$ "
 export PATH=/opt/homebrew/bin:$PATH
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
@@ -28,5 +34,8 @@ bindkey "^?" backward-delete-char
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 # Source customized function
 source ~/.zsh_custom_commands.sh
+source ~/.api/openai.sh
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+setopt extended_glob
+export PS1='%1~%F{yellow}$ %f'

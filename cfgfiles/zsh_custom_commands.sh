@@ -1,6 +1,24 @@
 #!/bin/bash
 
 # Function to clone the C++ template and rename the directory
+function runMatlab() {
+    # Check if a script name was provided as an argument
+    if [ -z "$1" ]; then
+        echo "Starting MATLAB without a script..."
+        matlab -nodesktop -nosplash
+        return 0  # Exit the function with an error status
+    fi
+
+    # Check if the MATLAB script file exists
+    if [ ! -f "$1" ]; then
+        echo "Error: The file '$1' does not exist."
+        return 1  # Exit the function with an error status
+    fi
+
+    # Run the MATLAB script without GUI
+    matlab -nodesktop -nosplash -r "run('$1');"
+}
+
 function clonecpp() {
     if [[ -z "$1" ]]; then
         echo "Usage: cloancpp <new_project_name>"
@@ -57,7 +75,7 @@ function pyenv() {
     fi
 }
 
-function renamemit() {
+function remove_() {
     # Usage: rename_files filetype
     # filetype: the type of the files you want to rename (e.g., pdf, txt)
 
