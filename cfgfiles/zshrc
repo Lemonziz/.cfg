@@ -7,6 +7,13 @@ if [[ -d "/Users/ziqi/Applications/samiam" ]]; then
     export PATH=/Users/ziqi/Applications/samiam:$PATH
 
 fi
+
+# export for react native
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 # Set up the user name
 export PATH=/opt/homebrew/bin:$PATH
 export CLICOLOR=1
@@ -28,8 +35,7 @@ ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
 ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
 # Vim key binding
 bindkey -v
-bindkey "^H" backward-delete-char
-bindkey "^?" backward-delete-char
+bindkey "^R" fzf-history-widget
 # Color for vim
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 # Source customized function
@@ -38,4 +44,22 @@ source ~/.api/openai.sh
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 setopt extended_glob
+# Check if the shell is zsh
 export PS1='%1~%F{yellow}$ %f'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
