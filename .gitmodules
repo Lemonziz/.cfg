@@ -16,3 +16,9 @@
 [submodule "cfgfiles/vim/plugged/vim-tmux-navigator"]
 	path = cfgfiles/vim/plugged/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "cfgfiles/fzf"]
+	path = cfgfiles/fzf
+	url = https://github.com/junegunn/fzf.git
+[submodule "cfgfiles/tmux/plugins/tpm"]
+	path = cfgfiles/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
