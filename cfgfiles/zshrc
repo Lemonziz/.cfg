@@ -1,14 +1,22 @@
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 alias ls='ls --color=auto'
+export PS1='%1~%F{yellow}$ %f'
+
+
 # Source all the zsh plugins from .cfg/zsh_plugins/*
 source "$HOME/.cfg/zsh_plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+# Load fzf after init, this line is neccessary. If not included ctrl-R for insert mode of vi-mode will not work. 
+function zvm_after_init() {
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    source <(fzf --zsh)
+}
 source "$HOME/.cfg/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOME/.cfg/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # Color for vim
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
-#fzf import
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
 # Disable Highlight with underline
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]=none
@@ -18,17 +26,16 @@ ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
 # Partial Accept Widgets for ZSH Autosuggestion Using Vim word foward key
 ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
 # Vim key binding
-bindkey -v
-bindkey "^R" fzf-history-widget
 # Source customized function
 source ~/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
 setopt extended_glob
-# Check if the shell is zsh
-export PS1='%1~%F{yellow}$ %f'
+
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export PATH="/usr/local/Astrill:$PATH"
+
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -45,3 +52,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/ziqi/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
