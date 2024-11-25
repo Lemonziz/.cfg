@@ -35,17 +35,20 @@ ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
 ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
 # Vim key binding
 bindkey -v
-bindkey "^R" fzf-history-widget
 # Color for vim
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 # Source customized function
 source ~/.zsh_custom_commands.sh
 source ~/.api/openai.sh
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
 setopt extended_glob
 # Check if the shell is zsh
 export PS1='%1~%F{yellow}$ %f'
+
+function zvm_after_init(){
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    source <(fzf --zsh)
+}
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
