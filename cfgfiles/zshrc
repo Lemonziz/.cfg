@@ -1,4 +1,3 @@
-# import brew environment
 export PATH=/opt/homebrew/bin:$PATH
 if [[ -d "/Applications/MATLAB_R2024b.app/bin" ]]; then
     export PATH=/Applications/MATLAB_R2024b.app/bin:$PATH
@@ -66,3 +65,10 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+# For compilers to find postgresql@15 you may need to set:
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
+
+# For pkg-config to find postgresql@15 you may need to set:
+export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@15/lib/pkgconfig"
