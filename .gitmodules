@@ -19,10 +19,10 @@
 [submodule "cfgfiles/fzf"]
 	path = cfgfiles/fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule "cfgfiles/tmux/plugins/tpm"]
-	path = cfgfiles/tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm.git
 [submodule "cfgfiles/neovim"]
 	path = cfgfiles/neovim
 	url = https://github.com/neovim/neovim.git
 	branch = release-0.10
+[submodule "cfgfiles/tmux/tpm"]
+	path = cfgfiles/tmux/tpm
+	url = https://github.com/tmux-plugins/tpm.git

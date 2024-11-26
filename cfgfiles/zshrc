@@ -20,33 +20,31 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 alias ls='ls --color=auto'
 export PS1='%1~%F{yellow}$ %f'
 
-
 # Source all the zsh plugins from .cfg/zsh_plugins/*
 source "$HOME/.cfg/zsh_plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-# Load fzf after init, this line is neccessary. If not included ctrl-R for insert mode of vi-mode will not work. 
+# Load fzf after init, this line is neccessary. If not included ctrl-R for insert mode of vi-mode will not work.
 function zvm_after_init() {
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    source <(fzf --zsh)
+    [ -f "$HOME"/.fzf.zsh ] && source "$HOME"/.fzf.zsh
+    eval $("$HOME"/.cfg/cfgfiles/fzf/bin/fzf --zsh)
 }
 source "$HOME/.cfg/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOME/.cfg/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # Color for vim
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 
-
 # Disable Highlight with underline
-(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-# Accept Widgets for ZSH Autosuggestion Using Vim word foward key
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
-# Partial Accept Widgets for ZSH Autosuggestion Using Vim word foward key
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
+# (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
+export ZSH_HIGHLIGHT_STYLES[path]=none
+# ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+# # Accept Widgets for ZSH Autosuggestion Using Vim word foward key
+# ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
+# # Partial Accept Widgets for ZSH Autosuggestion Using Vim word foward key
+# ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
 # Vim key binding
 # Color for vim
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 # Source customized function
-source ~/.zsh_custom_commands.sh
+source "$HOME"/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
 setopt extended_glob
 
@@ -54,16 +52,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 export PATH="/usr/local/Astrill:$PATH"
 
-
-
-function zvm_after_init(){
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    source <(fzf --zsh)
-}
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ziqi/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/ziqi/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
