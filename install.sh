@@ -1,12 +1,18 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 # install submodule first
 git submodule update --init --remote --recursive
-sudo apt update
-sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew update
+    brew install ninja gettext cmake unzip
+else
+    sudo apt update
+    sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+fi
+
 if ! command -v nvim >/dev/null 2>&1; then
     echo "Installing Neovim"
-    cd $HOME/.cfg/cfgfiles/neovim
+    cd "$HOME/.cfg/cfgfiles/neovim" || exit
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
 else
@@ -15,7 +21,7 @@ fi
 
 if ! command -v fzf >/dev/null 2>&1; then
     echo "Installing fzf"
-    $HOME/.cfg/cfgfiles/fzf/install
+    "$HOME"/.cfg/cfgfiles/fzf/install
 else
     echo "fzf already installed"
 fi
@@ -36,7 +42,7 @@ symlink() {
     link=$2
     if [ ! -e "$link" ]; then
         echo "-----> Symlinking your new $link"
-        ln -s $file $link
+        ln -s "$file" "$link"
     fi
 }
 # git submodule update --recursive this is the command for update
@@ -45,8 +51,8 @@ symlink() {
 for name in zsh_custom_commands.sh vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
     if [ ! -d "$name" ]; then
         target="$HOME/.$name"
-        backup $target
-        symlink $PWD/cfgfiles/$name $target
+        backup "$target"
+        symlink "$PWD"/cfgfiles/$name "$target"
     fi
 done
 
