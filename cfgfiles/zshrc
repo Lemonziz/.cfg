@@ -29,6 +29,7 @@ ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
 # Source customized function
 source ~/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
+
 setopt extended_glob
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -60,3 +61,4 @@ path=('/home/ziqi/.juliaup/bin' $path)
 export PATH
 
 # <<< juliaup initialize <<<
+
