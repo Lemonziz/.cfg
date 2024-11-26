@@ -1,5 +1,24 @@
 #!/usr/bin/zsh
 
+# install submodule first
+git submodule update --init --remote --recursive
+sudo apt update
+sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+if ! command -v nvim >/dev/null 2>&1; then
+    echo "Installing Neovim"
+    cd $HOME/.cfg/cfgfiles/neovim
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
+else
+    echo "Neovim already installed"
+fi
+
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "Installing fzf"
+    $HOME/.cfg/cfgfiles/fzf/install
+else
+    echo "fzf already installed"
+fi
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
 backup() {
@@ -20,13 +39,17 @@ symlink() {
     ln -s $file $link
   fi
 }
-
+# git submodule update --recursive this is the command for update
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
-for name in zsh_custom_commands.sh vim vimrc gitconfig tmux.conf zshrc; do
+for name in zsh_custom_commands.sh vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
   if [ ! -d "$name" ]; then
     target="$HOME/.$name"
     backup $target
     symlink $PWD/cfgfiles/$name $target
   fi
 done
+
+
+# install nvm
+# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash

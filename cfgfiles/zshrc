@@ -1,16 +1,21 @@
-# import brew environment
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# Set up the user name
-export PS1="%1~$ "
-export PATH=/opt/homebrew/bin:$PATH
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
+alias ls='ls --color=auto'
+export PS1='%1~%F{yellow}$ %f'
 
-alias docker="/Applications/Docker.app/Contents/Resources/bin/docker"
+
 # Source all the zsh plugins from .cfg/zsh_plugins/*
 source "$HOME/.cfg/zsh_plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+# Load fzf after init, this line is neccessary. If not included ctrl-R for insert mode of vi-mode will not work. 
+function zvm_after_init() {
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    source <(fzf --zsh)
+}
 source "$HOME/.cfg/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOME/.cfg/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Color for vim
+source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
+
 
 # Disable Highlight with underline
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
@@ -21,13 +26,39 @@ ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(vi-forward-char)
 # Partial Accept Widgets for ZSH Autosuggestion Using Vim word foward key
 ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS=(vi-forward-word vi-forward-word-end)
 # Vim key binding
-bindkey -v
-bindkey "^H" backward-delete-char
-bindkey "^?" backward-delete-char
-# Color for vim
-source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 # Source customized function
 source ~/.zsh_custom_commands.sh
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+
+setopt extended_glob
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export PATH="/usr/local/Astrill:$PATH"
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/ziqi/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/ziqi/.miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ziqi/.miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/ziqi/.miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/ziqi/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
 
