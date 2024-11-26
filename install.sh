@@ -1,45 +1,24 @@
-#!/bin/bash
-
-OS=$(uname -s)
-NVIM_PATH="/usr/local/bin/nvim"
-
-# Set appropriate shebang based on OS
-if [[ "$OS" == "Linux" ]]; then
-    BASH_PATH="/usr/bin/bash"
-elif [[ "$OS" == "Darwin" ]]; then
-    BASH_PATH="/bin/bash"
-else
-    echo "Unsupported operating system: $OS"
-    exit 1
-fi
+#!/usr/bin/zsh
 
 # install submodule first
-
 git submodule update --init --remote --recursive
-
-OS=$(uname -s)
-
-# Set appropriate shebang based on OS
-if [[ "$OS" == "Linux" ]]; then
-    sudo apt update
-    sudo apt install ninja-build gettext cmake unzip curl build-essential -y
-elif [[ "$OS" == "Darwin" ]]; then
-    brew update
-    brew install ninja gettext cmake unzip
+sudo apt update
+sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+if ! command -v nvim >/dev/null 2>&1; then
+    echo "Installing Neovim"
+    cd $HOME/.cfg/cfgfiles/neovim
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
 else
-    echo "Unsupported operating system: $OS"
-    exit 1
+    echo "Neovim already installed"
 fi
 
-if [[ -x "$NVIM_PATH" ]]; then
-    echo "Neovim is already installed at $NVIM_PATH. Skipping installation."
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "Installing fzf"
+    $HOME/.cfg/cfgfiles/fzf/install
 else
-    echo "Neovim is not installed. Proceeding with installation."
-    # install neovim
-    cd $HOME/.cfg/cfgfiles/neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
-    cd $HOME/.cfg/cfgfiles/neovim && sudo make install
+    echo "fzf already installed"
 fi
-
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
 backup() {
@@ -72,6 +51,5 @@ for name in zsh_custom_commands.sh vim vimrc gitconfig tmux.conf zshrc fzf tmux;
 done
 
 
-$HOME/.cfg/cfgfiles/fzf/install
 # install nvm
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
