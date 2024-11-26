@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 # install submodule first
 git submodule update --init --remote --recursive
