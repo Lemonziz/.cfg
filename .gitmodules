@@ -26,3 +26,6 @@
 [submodule "cfgfiles/tmux/plugins/tpm"]
 	path = cfgfiles/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule "cfgfiles/nvim"]
+	path = cfgfiles/nvim
+	url = git@github.com:Lemonziz/nvim.git
