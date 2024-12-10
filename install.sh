@@ -21,7 +21,7 @@ fi
 
 if ! command -v fzf >/dev/null 2>&1; then
     echo "Installing fzf"
-    "$HOME"/.cfg/cfgfiles/fzf/install
+    $HOME/.cfg/cfgfiles/fzf/install
 else
     echo "fzf already installed"
 fi
@@ -45,14 +45,28 @@ symlink() {
         ln -s "$file" "$link"
     fi
 }
+
 # git submodule update --recursive this is the command for update
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
 for name in zsh_custom_commands.sh vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
     if [ ! -d "$name" ]; then
         target="$HOME/.$name"
-        backup "$target"
-        symlink "$PWD"/cfgfiles/$name "$target"
+        backup $target
+        symlink $HOME/.cfg/cfgfiles/$name $target
+    fi
+done
+
+if [ ! -d "$HOME/.config" ]; then
+    echo "Creating .config directory"
+    mkdir -p $HOME/.config
+fi
+
+for name in nvim kitty; do
+    if [ ! -d "$name" ]; then
+        target="$HOME/.config/$name"
+        backup $target
+        symlink $HOME/.cfg/cfgfiles/$name $target
     fi
 done
 
