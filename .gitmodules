@@ -19,9 +19,11 @@
 [submodule "cfgfiles/fzf"]
 	path = cfgfiles/fzf
 	url = https://github.com/junegunn/fzf.git
+    shallow = true
 [submodule "cfgfiles/neovim"]
 	path = cfgfiles/neovim
 	url = https://github.com/neovim/neovim.git
+    shallow = true
 	branch = release-0.10
 [submodule "cfgfiles/nvim"]
 	path = cfgfiles/nvim
