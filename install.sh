@@ -4,7 +4,7 @@
 git submodule update --init --remote --recursive
 if [[ "$OSTYPE" == "darwin"* ]]; then
     brew update
-    brew install ninja gettext cmake unzip
+    brew install ninja gettext cmake unzip ripgrep
 else
     sudo apt update
     sudo apt install ninja-build gettext cmake unzip curl build-essential -y
