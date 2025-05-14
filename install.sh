@@ -1,12 +1,18 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 # install submodule first
 git submodule update --init --remote --recursive
-sudo apt update
-sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    brew update
+    brew install ninja gettext cmake unzip ripgrep
+else
+    sudo apt update
+    sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+fi
+
 if ! command -v nvim >/dev/null 2>&1; then
     echo "Installing Neovim"
-    cd $HOME/.cfg/cfgfiles/neovim
+    cd "$HOME/.cfg/cfgfiles/neovim" || exit
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     sudo make install
 else
@@ -36,14 +42,14 @@ symlink() {
     link=$2
     if [ ! -e "$link" ]; then
         echo "-----> Symlinking your new $link"
-        ln -s $file $link
+        ln -s "$file" "$link"
     fi
 }
 
 # git submodule update --recursive this is the command for update
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
-for name in zsh_custom_commands.sh vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
+for name in vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
     if [ ! -d "$name" ]; then
         target="$HOME/.$name"
         backup $target
@@ -64,5 +70,4 @@ for name in nvim kitty; do
     fi
 done
 
-# install nvm
-# curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+./install_npm.sh
