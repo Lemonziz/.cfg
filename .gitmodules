@@ -24,7 +24,7 @@
 	path = cfgfiles/neovim
 	url = https://github.com/neovim/neovim.git
     shallow = true
-	branch = release-0.10
+	branch = release-0.11
 [submodule "cfgfiles/nvim"]
 	path = cfgfiles/nvim
 	url = git@github.com:Lemonziz/nvim.git
