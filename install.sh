@@ -7,7 +7,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     brew install ninja gettext cmake unzip ripgrep
 else
     sudo apt update
-    sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+    sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks -y
 fi
 
 if ! command -v nvim >/dev/null 2>&1; then

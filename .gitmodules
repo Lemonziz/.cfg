@@ -22,12 +22,14 @@
     shallow = true
 [submodule "cfgfiles/neovim"]
 	path = cfgfiles/neovim
-	url = https://github.com/neovim/neovim.git
+    url = https://github.com/neovim/neovim.git
     shallow = true
 	branch = release-0.11
 [submodule "cfgfiles/nvim"]
 	path = cfgfiles/nvim
 	url = git@github.com:Lemonziz/nvim.git
+    branch = pc-branch
 [submodule "cfgfiles/tmux/tpm"]
 	path = cfgfiles/tmux/tpm
-	url = https://github.com/tmux-plugins/tpm.git
+    url = https://github.com/tmux-plugins/tpm.git
+    branch = master
