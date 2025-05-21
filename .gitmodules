@@ -27,11 +27,6 @@
 	url = https://github.com/junegunn/fzf.git
     branch=master
     shallow = true
-[submodule "cfgfiles/neovim"]
-	path = cfgfiles/neovim
-    url = https://github.com/neovim/neovim.git
-	branch = release-0.11
-    shallow = true
 [submodule "cfgfiles/nvim"]
 	path = cfgfiles/nvim
     url = https://github.com/Lemonziz/nvim.git
@@ -41,4 +36,9 @@
 	path = cfgfiles/tmux/tpm
     url = https://github.com/tmux-plugins/tpm.git
     branch = master
+    shallow = true
+[submodule "neovim"]
+	path = neovim
+	url = https://github.com/neovim/neovim.git
+	branch = master
     shallow = true
