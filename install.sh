@@ -3,7 +3,7 @@
 # install submodule first
 git submodule update --init --remote --recursive
 sudo apt update
-sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks -y
+sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv -y
 
 # install neovim
 if ! command -v nvim >/dev/null 2>&1; then
@@ -74,6 +74,8 @@ case ${answer:0:1} in
 y | Y)
     echo "Installing npm packages..."
     $HOME/.cfg/install_npm.sh
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
     ;;
 *)
     echo "Skipping npm installation."
