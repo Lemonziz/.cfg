@@ -30,7 +30,7 @@
 [submodule "cfgfiles/nvim"]
 	path = cfgfiles/nvim
     url = https://github.com/Lemonziz/nvim.git
-    branch = pc-branch
+    shallow = true
 [submodule "cfgfiles/tmux/tpm"]
 	path = cfgfiles/tmux/tpm
     url = https://github.com/tmux-plugins/tpm.git
