@@ -74,8 +74,6 @@ case ${answer:0:1} in
 y | Y)
     echo "Installing npm packages..."
     $HOME/.cfg/install_npm.sh
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
     ;;
 *)
     echo "Skipping npm installation."
