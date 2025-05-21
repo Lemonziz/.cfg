@@ -12,35 +12,28 @@ source "$HOME/.cfg/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 # Color for vim
 source "$HOME/.cfg/cfgfiles/vim/plugged/gruvbox/gruvbox_256palette.sh"
 
-# fzf init
-# Since the default initialization mode, this plugin will overwrite the previous key bindings, this causes the key bindings of other plugins (i.e. fzf, zsh-autocomplete, etc.) to fail.
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh -> fail for zsh-autocomplete and fzf
-# Append a command directly
-
 # Disable Highlight with underline
 export ZSH_HIGHLIGHT_STYLES[path]=none
 setopt extended_glob
 
 # export PATH
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/intellij-idea/bin:$PATH"
+
+# customed zshrc file for pc-branch
+[[ -f "$HOME/.cfg/cfgfiles/zshrc_custom" ]] && source "$HOME/.cfg/cfgfiles/zshrc_custom"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+__conda_setup="$('/home/ziqi/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/.miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.miniconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/ziqi/.miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/ziqi/.miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/.miniconda3/bin:$PATH"
+        export PATH="/home/ziqi/.miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# This loads nvm bash_completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
