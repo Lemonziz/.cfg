@@ -1,2 +1,2 @@
 # use following code in command line to test interactively
-docker build --no-cache -t cfg-install-test . && docker run -it cfg-install-test
+sudo docker build --no-cache -t cfg-install-test . && sudo docker run -it cfg-install-test /bin/bash
