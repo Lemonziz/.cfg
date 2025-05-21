@@ -70,4 +70,4 @@ for name in nvim kitty; do
     fi
 done
 
-./install_npm.sh
+$HOME/.cfg/cfgfiles/install_npm.sh
