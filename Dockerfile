@@ -12,7 +12,7 @@ USER user
 WORKDIR /home/user
 
 # Clone your actual repo
-RUN git clone -b pc-branch https://github.com/Lemonziz/.cfg.git /home/user/.cfg
+RUN git clone https://github.com/Lemonziz/.cfg.git /home/user/.cfg
 
 # Run the installation script
 # This will automatically run when the container starts
