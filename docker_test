@@ -1,0 +1,3 @@
+# use following code in command line to test interactively
+sudo docker build --no-cache -t cfg-install-test .
+sudo docker run -it cfg-install-test /bin/bash
