@@ -67,3 +67,15 @@ for name in nvim kitty; do
         symlink $HOME/.cfg/cfgfiles/$name $target
     fi
 done
+
+# Ask user if they want to install npm
+read -p "Do you want to install npm packages? (y/n): " answer
+case ${answer:0:1} in
+y | Y)
+    echo "Installing npm packages..."
+    $HOME/.cfg/install_npm.sh
+    ;;
+*)
+    echo "Skipping npm installation."
+    ;;
+esac
