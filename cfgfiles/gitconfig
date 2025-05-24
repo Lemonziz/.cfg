@@ -9,6 +9,9 @@
 [core]
 	editor = vim
 [pull]
-	rebase = false
+	rebase = true
+    ff = only
 [init]
 	defaultBranch = main
+[rebase]
+    autoStash = true
