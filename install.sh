@@ -1,9 +1,11 @@
 #!/bin/bash
 
+set -e
+
 # install submodule first
 git submodule update --init --remote --recursive
 sudo apt update
-sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv -y
+sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv tmux -y
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 if [[ "$(uname -s)" == "Linux" ]]; then
     ./kitty_desktop.sh
