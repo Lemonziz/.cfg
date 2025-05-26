@@ -1,4 +1,5 @@
 export PATH="/opt/intellij-idea/bin:$PATH"
+alias cursor="$HOME/Applications/cursor.AppImage --no-sandbox"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

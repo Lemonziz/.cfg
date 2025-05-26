@@ -20,7 +20,12 @@ setopt extended_glob
 export PATH="$HOME/.local/bin:$PATH"
 
 # customed zshrc file for pc-branch
-[[ -f "$HOME/.cfg/cfgfiles/zshrc_linux" ]] && source "$HOME/.cfg/cfgfiles/zshrc_linux"
+if [[ "$(uname -s)" == "Linux" ]]; then
+    [[ -f "$HOME/.cfg/cfgfiles/zshrc_linux" ]] && source "$HOME/.cfg/cfgfiles/zshrc_linux"
+elif [[ "$(uname -s)" == "Darwin" ]]; then
+    # macOS config will be added later
+    true
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
