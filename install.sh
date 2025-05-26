@@ -21,6 +21,14 @@ else
     echo "Kitty already installed"
 fi
 
+# install FiraCode
+if [[ "$(uname -s)" == "Linux" ]]; then
+    mkdir -p ~/.local/share/fonts
+    curl -L -o /tmp/FiraCode.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip"
+    unzip -j /tmpFiraCode.zip "*.ttf" -d ~/.local/share/fonts/
+    rm -f /tmp/FiraCode.zip
+fi
+
 # install neovim
 if ! command -v nvim >/dev/null 2>&1; then
     echo "Installing Neovim"
@@ -34,7 +42,7 @@ fi
 # install fzf
 if ! command -v fzf >/dev/null 2>&1; then
     echo "Installing fzf"
-    $HOME/.cfg/cfgfiles/fzf/install
+    "$HOME/.cfg/cfgfiles/fzf/install"
 else
     echo "fzf already installed"
 fi
@@ -65,7 +73,7 @@ symlink() {
 #
 if [ ! -d "$HOME/.config" ]; then
     echo "Creating .config directory"
-    mkdir -p $HOME/.config
+    mkdir -p "$HOME/.config"
 fi
 
 for name in vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
