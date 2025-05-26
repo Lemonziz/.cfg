@@ -6,9 +6,19 @@ set -e
 git submodule update --init --remote --recursive
 sudo apt update
 sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv tmux -y
-curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-if [[ "$(uname -s)" == "Linux" ]]; then
-    ./kitty_desktop.sh
+
+if ! command -v kitty >/dev/null 2>&1; then
+    echo "Installing Kitty..."
+    if curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin; then
+        if [[ "$(uname -s)" == "Linux" ]]; then
+            ./kitty_desktop.sh
+        fi
+    else
+        echo "Failed to install Kitty"
+        exit 1
+    fi
+else
+    echo "Kitty already installed"
 fi
 
 # install neovim
