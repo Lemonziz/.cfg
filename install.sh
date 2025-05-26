@@ -4,6 +4,7 @@
 git submodule update --init --remote --recursive
 sudo apt update
 sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv -y
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 # install neovim
 if ! command -v nvim >/dev/null 2>&1; then
