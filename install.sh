@@ -5,6 +5,10 @@ set -e
 # install submodule first
 git submodule update --init --remote --recursive
 source ./functions/gen_func.sh
+
+# general install previous
+
+install_kitty
 if [[ $(uname -s) == "Darwin" ]]; then
     if [[ $(uname -m) != "arm64" ]]; then
         echo "This script is intended for macOS ARM64 architecture only."
@@ -21,11 +25,15 @@ elif [[ $(uname -s) == "Linux" ]]; then
     install_firacode_linux
     install_neovim_linux
     install_fzf_linux
+    install_kitty_desktop_linux
 else
     echo "Unsupported OS: $(uname -s). This script supports macOS and Linux only."
     echo "Please install dependencies manually"
     exit 1
 fi
+
+# general install after
+install_npm
 
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
@@ -38,6 +46,7 @@ if [ ! -d "$HOME/.config" ]; then
     mkdir -p "$HOME/.config"
 fi
 
+# create symlink for configurations
 for name in vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
     if [ ! -d "$name" ]; then
         target="$HOME/.$name"
@@ -53,15 +62,3 @@ for name in nvim kitty; do
         symlink "$HOME/.cfg/cfgfiles/$name" "$target"
     fi
 done
-
-# Ask user if they want to install npm
-read -rp "Do you want to install npm packages? (y/n): " answer
-case ${answer:0:1} in
-y | Y)
-    echo "Installing npm packages..."
-    "$HOME/.cfg/install_npm.sh"
-    ;;
-*)
-    echo "Skipping npm installation."
-    ;;
-esac
