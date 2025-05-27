@@ -36,8 +36,3 @@
     url = https://github.com/tmux-plugins/tpm.git
     branch = master
     shallow = true
-[submodule "cfgfiles/neovim"]
-	path = cfgfiles/neovim
-	url = https://github.com/neovim/neovim.git
-	branch = master
-    shallow = true
