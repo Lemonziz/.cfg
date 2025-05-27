@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # install submodule first
 git submodule update --init --remote --recursive
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -10,14 +12,42 @@ else
     sudo apt install ninja-build gettext cmake unzip curl build-essential -y
 fi
 
-if ! command -v nvim >/dev/null 2>&1; then
-    echo "Installing Neovim"
-    cd "$HOME/.cfg/cfgfiles/neovim" || exit
-    make CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make install
+source install_func.sh
+
+# =============================================
+# NEOVIM INSTALLATION
+# =============================================
+echo "🔍 Checking Neovim installation..."
+if command -v nvim >/dev/null 2>&1; then
+    current=$(get_current_nvim_version)
+    latest=$(get_latest_nvim_version)
+    
+    echo "Current: $current"
+    echo "Latest:  $latest"
+    
+    if [ "$current" = "$latest" ]; then
+        echo "✅ You have the latest version!"
+    else
+        echo "📦 Update available: $current → $latest"
+        read -p "Do you want to update? (y/N): " response
+        case $response in
+            [yY]|[yY][eE][sS])
+                echo "🔄 Updating Neovim..."
+                install_neovim
+                ;;
+            *)
+                echo "⏭️  Update skipped."
+                ;;
+        esac
+    fi
 else
-    echo "Neovim already installed"
+    echo "❌ Neovim not found."
+    echo "📥 Installing Neovim..."
+    install_neovim
+    ;;
 fi
+
+# ========================================
 
 if ! command -v fzf >/dev/null 2>&1; then
     echo "Installing fzf"
