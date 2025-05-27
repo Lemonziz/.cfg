@@ -47,7 +47,7 @@ if [ ! -d "$HOME/.config" ]; then
 fi
 
 # create symlink for configurations
-for name in vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
+for name in vim vimrc gitconfig tmux.conf zshrc tmux; do
     if [ ! -d "$name" ]; then
         target="$HOME/.$name"
         backup "$target"
