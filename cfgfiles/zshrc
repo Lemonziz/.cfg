@@ -19,14 +19,14 @@ setopt extended_glob
 # export PATH
 export PATH="$HOME/.local/bin:$PATH"
 
+# Load nvm (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
 # customed zshrc file for pc-branch
 if [[ "$(uname -s)" == "Linux" ]]; then
     [[ -f "$HOME/.cfg/cfgfiles/zshrc_linux" ]] && source "$HOME/.cfg/cfgfiles/zshrc_linux"
 elif [[ "$(uname -s)" == "Darwin" ]]; then
-    # macOS config will be added later
-    true
+    [[ -f "$HOME/.cfg/cfgfiles/zshrc_macos" ]] && source "$HOME/.cfg/cfgfiles/zshrc_macos"
 fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
