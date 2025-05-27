@@ -15,4 +15,4 @@ WORKDIR /home/user
 
 # Run the installation script
 # This will automatically run when the container starts
-CMD ["/bin/bash", "-c", ""git clone https://github.com/Lemonziz/.cfg.git /home/user/.cfg && cd /home/user/.cfg && ./install.sh && echo 'Installation complete. Checking symlinks:' && ls -la /home/user && exec /bin/bash"]
+CMD ["/bin/bash", "-c", "git clone https://github.com/Lemonziz/.cfg.git /home/user/.cfg && cd /home/user/.cfg && ./install.sh && echo 'Installation complete. Checking symlinks:' && ls -la /home/user && exec /bin/bash"]

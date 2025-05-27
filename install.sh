@@ -4,29 +4,27 @@ set -e
 
 # install submodule first
 git submodule update --init --remote --recursive
-source ./functions/gen_func.sh
 
-# general install previous
+# source general functions
+[[ -f "$HOME/.cfg/cfgfiles/general.sh" ]] && source "$HOME/.cfg/cfgfiles/general.sh"
 
-install_kitty
 if [[ $(uname -s) == "Darwin" ]]; then
     if [[ $(uname -m) != "arm64" ]]; then
         echo "This script is intended for macOS ARM64 architecture only."
         echo "Please run the script on an ARM64 Mac."
         exit 1
     fi
-    source ./functions/func_macos.sh
+    [[ -f "$HOME/.cfg/cfgfiles/macos.sh" ]] && source "$HOME/.cfg/cfgfiles/macos.sh"
     install_dependency_macos
     install_firacode_linux
     install_neovim_macos_arm64
     install_fzf_macos_arm64
 elif [[ $(uname -s) == "Linux" ]]; then
-    source ./functions/func_linux.sh
+    [[ -f "$HOME/.cfg/cfgfiles/linux.sh" ]] && source "$HOME/.cfg/cfgfiles/linux.sh"
     install_dependency_linux
     install_firacode_linux
     install_neovim_linux
     install_fzf_linux
-    install_kitty_desktop_linux
 else
     echo "Unsupported OS: $(uname -s). This script supports macOS and Linux only."
     echo "Please install dependencies manually"
@@ -34,6 +32,7 @@ else
 fi
 
 # general install after
+install_kitty
 install_npm
 
 # Define a function which rename a `target` file to `target.backup` if the file
