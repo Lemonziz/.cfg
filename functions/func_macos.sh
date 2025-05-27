@@ -1,6 +1,6 @@
 install_dependency_macos() {
     brew update
-    brew install ninja gettext cmake unzip ripgrep curl zsh luarocks python3-venv tmux
+    brew install ninja gettext cmake unzip ripgrep curl zsh luarocks tmux
 }
 
 install_neovim_macos_arm64() {
@@ -20,7 +20,7 @@ install_neovim_macos_arm64() {
     sudo cp -r nvim-macos-arm64/* /usr/local/
 
     # Clean up
-    cd "$HOME/.cfg" || exit 1 # Return to previous directory
+    cd - >/dev/null || exit 1 # Return to previous directory
     rm -rf "$temp_dir"
 
     echo "✅ Neovim installed successfully!"
