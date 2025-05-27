@@ -6,7 +6,7 @@ set -e
 git submodule update --init --remote --recursive
 
 # source general functions
-[[ -f "$HOME/.cfg/functions/general.sh" ]] && source "$HOME/.cfg/functions/general.sh"
+[[ -f "$HOME/.cfg/functions/general.sh" ]] && source "$HOME/.cfg/functions/general.sh" || exit 1
 
 if [[ $(uname -s) == "Darwin" ]]; then
     if [[ $(uname -m) != "arm64" ]]; then
@@ -14,13 +14,13 @@ if [[ $(uname -s) == "Darwin" ]]; then
         echo "Please run the script on an ARM64 Mac."
         exit 1
     fi
-    [[ -f "$HOME/.cfg/functions/macos.sh" ]] && source "$HOME/.cfg/functions/macos.sh"
+    [[ -f "$HOME/.cfg/functions/macos.sh" ]] && source "$HOME/.cfg/functions/macos.sh" || exit 1
     install_dependency_macos
     install_firacode_linux
     install_neovim_macos_arm64
     install_fzf_macos_arm64
 elif [[ $(uname -s) == "Linux" ]]; then
-    [[ -f "$HOME/.cfg/functions/linux.sh" ]] && source "$HOME/.cfg/functions/linux.sh"
+    [[ -f "$HOME/.cfg/functions/linux.sh" ]] && source "$HOME/.cfg/functions/linux.sh" || exit 1
     install_dependency_linux
     install_firacode_linux
     install_neovim_linux
