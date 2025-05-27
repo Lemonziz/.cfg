@@ -29,5 +29,4 @@
 [submodule "cfgfiles/tmux/tpm"]
 	path = cfgfiles/tmux/tpm
     url = https://github.com/tmux-plugins/tpm.git
-    branch = master
     shallow = true
