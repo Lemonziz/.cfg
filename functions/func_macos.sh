@@ -28,6 +28,15 @@ install_neovim_macos_arm64() {
     nvim --version
 }
 
+install_firacode_macos_arm64() {
+    # get latest download link for FiraCode from GitHub
+    # download and install FiraCode
+    mkdir -p ~/.local/share/fonts
+    curl -L "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip" -o /tmp/FiraCode.zip
+    unzip -j /tmp/FiraCode.zip "*.ttf" -d ~/Library/Fonts/
+    rm -f /tmp/FiraCode.zip
+}
+
 install_fzf_macos_arm64() {
     temp_dir=$(mktemp -d)
     download_url=$(curl -s "https://api.github.com/repos/junegunn/fzf/releases/latest" |

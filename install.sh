@@ -17,6 +17,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
     fi
     source ./functions/func_macos.sh
     install_dependency_macos
+    install_firacode_linux
     install_neovim_macos_arm64
     install_fzf_macos_arm64
 elif [[ $(uname -s) == "Linux" ]]; then
