@@ -1,5 +1,6 @@
 _install_kitty_desktop_linux() {
     mkdir -p ~/.local/bin
+    mkdir -p ~/.local/share/applications
     # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
     # your system-wide PATH)
     ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/

@@ -1,3 +1,10 @@
 # use following code in command line to test interactively
 sudo docker build --no-cache -t cfg-install-test .
-sudo docker run -it cfg-install-test /bin/bash
+
+# run the container in detached mode
+sudo docker run --platform linux/amd64 cfg-install-test
+
+# Run the container interactively
+sudo docker run --platform linux/amd64 -it --name cfg-test cfg-install-test /bin/bash
+
+# git clone https://github.com/Lemonziz/.cfg.git /home/user/.cfg
