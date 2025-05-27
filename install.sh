@@ -4,69 +4,31 @@ set -e
 
 # install submodule first
 git submodule update --init --remote --recursive
-sudo apt update
-sudo apt install ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv tmux -y
-
-if ! command -v kitty >/dev/null 2>&1; then
-    echo "Installing Kitty..."
-    if curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin; then
-        if [[ "$(uname -s)" == "Linux" ]]; then
-            ./kitty_desktop.sh
-        fi
-    else
-        echo "Failed to install Kitty"
+source ./functions/gen_func.sh
+if [[ $(uname -s) == "Darwin" ]]; then
+    if [[ $(uname -m) != "arm64" ]]; then
+        echo "This script is intended for macOS ARM64 architecture only."
+        echo "Please run the script on an ARM64 Mac."
         exit 1
     fi
+    source ./functions/func_macos.sh
+    install_dependency_macos
+    install_neovim_macos_arm64
+    install_fzf_macos_arm64
+elif [[ $(uname -s) == "Linux" ]]; then
+    source ./functions/func_linux.sh
+    install_dependency_linux
+    install_firacode_linux
+    install_neovim_linux
+    install_fzf_linux
 else
-    echo "Kitty already installed"
-fi
-
-# install FiraCode
-if [[ "$(uname -s)" == "Linux" ]]; then
-    mkdir -p ~/.local/share/fonts
-    curl -L -o /tmp/FiraCode.zip "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip"
-    unzip -j /tmpFiraCode.zip "*.ttf" -d ~/.local/share/fonts/
-    rm -f /tmp/FiraCode.zip
-fi
-
-# install neovim
-if ! command -v nvim >/dev/null 2>&1; then
-    echo "Installing Neovim"
-    cd "$HOME/.cfg/cfgfiles/neovim" || exit
-    make CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make install
-else
-    echo "Neovim already installed"
-fi
-
-# install fzf
-if ! command -v fzf >/dev/null 2>&1; then
-    echo "Installing fzf"
-    "$HOME/.cfg/cfgfiles/fzf/install"
-else
-    echo "fzf already installed"
+    echo "Unsupported OS: $(uname -s). This script supports macOS and Linux only."
+    echo "Please install dependencies manually"
+    exit 1
 fi
 
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
-backup() {
-    target=$1
-    if [ -e "$target" ]; then
-        if [ ! -L "$target" ]; then
-            mv "$target" "$target.bak"
-            echo "-----> Moved your old $target config file to $target.bak"
-        fi
-    fi
-}
-
-symlink() {
-    file=$1
-    link=$2
-    if [ ! -e "$link" ]; then
-        echo "-----> Symlinking your new $link"
-        ln -s "$file" "$link"
-    fi
-}
 
 # For all files `$name` in the present folder except `*.sh`, `README.md`, `settings.json`,
 # and `config`, backup the target file located at `~/.$name` and symlink `$name` to `~/.$name`
@@ -79,25 +41,25 @@ fi
 for name in vim vimrc gitconfig tmux.conf zshrc fzf tmux; do
     if [ ! -d "$name" ]; then
         target="$HOME/.$name"
-        backup $target
-        symlink $HOME/.cfg/cfgfiles/$name $target
+        backup "$target"
+        symlink "$HOME/.cfg/cfgfiles/$name" "$target"
     fi
 done
 
 for name in nvim kitty; do
     if [ ! -d "$name" ]; then
         target="$HOME/.config/$name"
-        backup $target
-        symlink $HOME/.cfg/cfgfiles/$name $target
+        backup "$target"
+        symlink "$HOME/.cfg/cfgfiles/$name" "$target"
     fi
 done
 
 # Ask user if they want to install npm
-read -p "Do you want to install npm packages? (y/n): " answer
+read -rp "Do you want to install npm packages? (y/n): " answer
 case ${answer:0:1} in
 y | Y)
     echo "Installing npm packages..."
-    $HOME/.cfg/install_npm.sh
+    "$HOME/.cfg/install_npm.sh"
     ;;
 *)
     echo "Skipping npm installation."

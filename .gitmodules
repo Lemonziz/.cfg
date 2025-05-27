@@ -22,11 +22,6 @@
 	path = cfgfiles/vim/plugged/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
     shallow = true
-[submodule "cfgfiles/fzf"]
-	path = cfgfiles/fzf
-	url = https://github.com/junegunn/fzf.git
-    branch=master
-    shallow = true
 [submodule "cfgfiles/nvim"]
 	path = cfgfiles/nvim
     url = https://github.com/Lemonziz/nvim.git
