@@ -4,12 +4,16 @@ set -e
 
 # install submodule first
 git submodule update --init --remote --recursive
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ $(uname -s) == "Darwin" ]]; then
     brew update
     brew install ninja gettext cmake unzip ripgrep
-else
+elif [[ $(uname -s) == "Linux" ]]; then
     sudo apt update
     sudo apt install ninja-build gettext cmake unzip curl build-essential -y
+else
+    echo "Unsupported OS. This script supports macOS and Linux only."
+   echo "Please install dependencies manually"
+    exit 1
 fi
 
 source install_func.sh
