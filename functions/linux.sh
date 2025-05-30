@@ -11,12 +11,18 @@ install_neovim_linux() {
     cd "$temp_dir" || exit 1
 
     # Download and extract
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-    tar xzf nvim-linux-x86_64.tar.gz
-
-    # Install to system location
-    echo "Installing Neovim to /usr/local..."
-    sudo cp -r nvim-linux-x86_64/* /usr/local/
+    if [[ $(uname -m) == "x86_64" ]]; then
+        download="nvim-linux-x86_64"
+    elif [[ $(uname -m) == "aarch64" || $(uname -m) == "arm64" ]]; then
+        download="nvim-linux-arm64"
+    else
+        echo "Unsupported architecture: $(uname -m)"
+        exit 1
+    fi
+    curl -LO https://github.com/neovim/neovim/releases/latest/download/"$download.tar.gz"
+    tar xzvf "$download.tar.gz"
+    echo "Installing Neovim to /usr/local..." # Install to system location
+    sudo cp -r "$download"/* /usr/local/
 
     # Clean up
     cd - >/dev/null || exit 1 # Return to previous directory silently
@@ -38,13 +44,22 @@ install_firacode_linux() {
 
 install_fzf_linux() {
     temp_dir=$(mktemp -d)
+
+    if [[ $(uname -m) == "x86_64" ]]; then
+        arch="amd64"
+    elif [[ $(uname -m) == "aarch64" || $(uname -m) == "arm64" ]]; then
+        arch="arm64"
+    else
+        echo "Unsupported architecture: $(uname -m)"
+        exit 1
+    fi
     download_url=$(curl -s "https://api.github.com/repos/junegunn/fzf/releases/latest" |
-        grep '"browser_download_url":.*linux_amd64.tar.gz' |
+        grep "\"browser_download_url\":.*linux_${arch}.tar.gz" |
         cut -d'"' -f4)
     echo "downloading from $download_url..."
     cd "$temp_dir" || exit 1
-    curl -L "$download_url" -o "fzf-linux_amd64.tar.gz"
-    tar xzf fzf-linux_amd64.tar.gz
+    curl -L "$download_url" -o "fzf-linux_${arch}.tar.gz"
+    tar xzf fzf-linux_${arch}.tar.gz
     sudo mv fzf /usr/local/bin/
     sudo chmod +x /usr/local/bin/fzf
     cd - >/dev/null || exit 1
