@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC1091
 
 set -e
 
@@ -32,6 +33,7 @@ else
 fi
 
 # general install after
+chsh -s "$(which zsh)"
 install_kitty
 install_npm
 
