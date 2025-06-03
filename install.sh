@@ -33,7 +33,14 @@ else
 fi
 
 # general install after
-chsh -s "$(which zsh)"
+
+# set default shell to zsh if not already set
+if [[ "$SHELL" != "$(which zsh)" ]]; then
+    echo "Changing default shell to zsh"
+    chsh -s "$(which zsh)"
+else
+    echo "Default shell is already set to zsh"
+fi
 install_kitty
 install_npm
 
