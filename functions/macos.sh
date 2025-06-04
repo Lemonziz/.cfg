@@ -1,6 +1,6 @@
 install_dependency_macos() {
     brew update
-    brew install ninja gettext cmake unzip ripgrep curl zsh luarocks tmux rust
+    brew install ninja gettext cmake unzip ripgrep curl zsh luarocks tmux rust xclip
 }
 
 install_neovim_macos_arm64() {
