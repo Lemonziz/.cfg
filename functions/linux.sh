@@ -1,6 +1,6 @@
 install_dependency_linux() {
     sudo apt update
-    sudo apt install curl ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv tmux rustc xclip -y
+    sudo apt install curl ninja-build gettext cmake unzip curl build-essential zsh ripgrep luarocks python3-venv tmux rustc xclip python3-pip fd-find -y
 }
 
 install_neovim_linux() {
