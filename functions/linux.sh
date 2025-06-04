@@ -56,6 +56,11 @@ install_fzf_linux() {
     download_url=$(curl -s "https://api.github.com/repos/junegunn/fzf/releases/latest" |
         grep "\"browser_download_url\":.*linux_${arch}.tar.gz" |
         cut -d'"' -f4)
+    if [ -z "$download_url" ]; then
+        echo "❌ Error: Could not find download URL for fzf darwin_arm64"
+        rm -rf "$temp_dir"
+        exit 1
+    fi
     echo "downloading from $download_url..."
     cd "$temp_dir" || exit 1
     curl -L "$download_url" -o "fzf-linux_${arch}.tar.gz"

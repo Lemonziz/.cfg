@@ -1,6 +1,6 @@
 install_dependency_macos() {
     brew update
-    brew install ninja gettext cmake unzip ripgrep curl zsh luarocks tmux rust xclip fd
+    brew install ninja gettext cmake unzip ripgrep curl luarocks tmux rust xclip fd
 }
 
 install_neovim_macos_arm64() {
@@ -42,6 +42,12 @@ install_fzf_macos_arm64() {
     download_url=$(curl -s "https://api.github.com/repos/junegunn/fzf/releases/latest" |
         grep '"browser_download_url":.*darwin_arm64.tar.gz' |
         cut -d'"' -f4)
+    # Check if download_url is not empty
+    if [ -z "$download_url" ]; then
+        echo "❌ Error: Could not find download URL for fzf darwin_arm64"
+        rm -rf "$temp_dir"
+        exit 1
+    fi
     echo "downloading from $download_url..."
     cd "$temp_dir" || exit 1
     curl -L "$download_url" -o "fzf-darwin_arm64.tar.gz"
