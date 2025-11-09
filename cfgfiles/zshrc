@@ -6,7 +6,8 @@ export PS1='%1~%F{yellow}$ %f'
 
 # Source all the zsh plugins from .cfg/zsh_plugins/*
 source "$HOME/.cfg/zsh_plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+# zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+zvm_after_init_commands+=('source <(fzf --zsh)')
 source "$HOME/.cfg/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$HOME/.cfg/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 # Color for vim
