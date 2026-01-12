@@ -16,18 +16,13 @@ _install_kitty_desktop_linux() {
 }
 
 install_kitty() {
-    if ! command -v kitty >/dev/null 2>&1; then
-        echo "Installing Kitty..."
-        if curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin; then
-            if [[ "$(uname -s)" == "Linux" ]]; then
-                _install_kitty_desktop_linux
-            fi
-        else
-            echo "Failed to install Kitty"
-            exit 1
+    if curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin; then
+        if [[ "$(uname -s)" == "Linux" ]]; then
+            _install_kitty_desktop_linux
         fi
     else
-        echo "Kitty already installed"
+        echo "Failed to install Kitty"
+        exit 1
     fi
 }
 
